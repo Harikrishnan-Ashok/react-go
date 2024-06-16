@@ -1,8 +1,12 @@
+import {BrowserRouter,Route,Routes} from "react-router-dom"
+import LandingPage from "./pages/LandingPage";
 export default function App()
 {
-	return(
-		<>
-			<h1>hello world</h1>
-		</>
-	);
+	return(<>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<LandingPage />} />
+			</Routes>
+		</BrowserRouter>
+	</>);
 }
