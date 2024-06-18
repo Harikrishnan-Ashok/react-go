@@ -1,7 +1,9 @@
 import {NavLink} from "react-router-dom";
 import styled from "styled-components";
+import Button from "../components/Button";
 
 const Container=styled.div`
+	overflow:hidden;
 	cursor:pointer;
 	display:flex;
 	width:100%;
@@ -44,10 +46,23 @@ const RightContainer=styled.div`
 `;
 const ScrollDiv = styled.div`
 	width:20%;
-	background-color:blue;
+	border-style:solid;
+	border-top:none;
+	border-bottom:none;
+	border-color:white;
 `;
 
+const Test =styled.div`
+@keyframes slide-top {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(500px);
+  }
+}
 
+`;
 export default function LandingPage()
 {
 	return(<Container>
@@ -57,11 +72,18 @@ export default function LandingPage()
 				<Text>Tired of Finding what u need ?</Text>
 				<Text><Title>BUILD IT</Title> makes it easy</Text>	
 			</Body>
-			<Footer><NavLink to = "/apphome">take me to the site</NavLink> </Footer>
+			<Footer><NavLink to = "/apphome">	
+			<Button>
+					<h3>Click here to Visit</h3>
+			</Button>
+					</NavLink> </Footer>
 		</LeftContainer>
 		<RightContainer>
-			<ScrollDiv>test</ScrollDiv>
-			<ScrollDiv>test</ScrollDiv>
+			<ScrollDiv>
+			<Test>hello</Test>
+			</ScrollDiv>
+			<ScrollDiv>
+			</ScrollDiv>
 		</RightContainer>
-	</Container>);
+</Container>);
 }
