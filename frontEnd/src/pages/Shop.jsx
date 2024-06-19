@@ -1,6 +1,10 @@
+import Hero from "../components/Hero";
+
 export default function Shop()
 {
-	return(<h1>hello</h1>);
+	return(<>
+		<Hero></Hero>		
+	</>);
 }
 
 
