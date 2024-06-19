@@ -70,6 +70,7 @@ const KartCount = styled.div`
 import shop from "./assets/bag.png"
 import kart from "./assets/store.png"
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
 export default function Navbar()
 {
@@ -82,27 +83,27 @@ export default function Navbar()
 			</NavLogo>
 			<NavMenu>
 
-			<Item onClick={() => setMenu("shop")}>Shop
+			<Item onClick={() => setMenu("shop")}><Link style={{textDecoration:"none"}}to={"/"}>Shop
 				{menu === "shop" && (
 					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Item>
-			<Item onClick={() => setMenu("women")}>women
+			</Link></Item>
+			<Item onClick={() => setMenu("women")}><Link style={{textDecoration:"none"}} to={"/women"}>Women
 				{menu === "women" && (
 					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Item>
-			<Item onClick={() => setMenu("men")}>men
+			</Link></Item>
+			<Item onClick={() => setMenu("men")}><Link style={{textDecoration:"none"}} to={"/men"}>Men
 				{menu === "men" && (
 					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Item>
-			<Item onClick={() => setMenu("kids")}>kids
+			</Link></Item>
+			<Item onClick={() => setMenu("kids")}><Link style={{textDecoration:"none"}} to={"kids"}>Kids
 				{menu === "kids" && (
 					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Item>
+			</Link></Item>
 			</NavMenu>
 			<LoginKart>
-				<img style={{width: "50px", height: "50px"}} src={kart} alt="icon here" />
+				<Link to={"kart"}><img style={{width: "50px", height: "50px"}} src={kart} alt="icon here" /></Link>	
 				<KartCount>0</KartCount>
-				<Button>Login</Button>
+				<Link to={"/login"}><Button>Login</Button></Link>
 			</LoginKart>
 		</Nav>
 	</>);

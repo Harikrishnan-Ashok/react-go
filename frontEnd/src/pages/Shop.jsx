@@ -1,6 +1,6 @@
 export default function Shop()
 {
-	return(<>hello</>);
+	return(<h1>hello</h1>);
 }
 
 
