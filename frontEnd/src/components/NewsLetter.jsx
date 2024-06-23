@@ -10,7 +10,7 @@ const Container=styled.div`
 	margin:auto;
 	padding:0px 140px;
 	margin-bottom:150px;
-	background:linearGradient(180deg,#fde1ff 0%,#e1ffea22 60%);
+	background: linear-gradient(180deg, #fde1ff 0%, rgba(225, 255, 234, 0.13) 60%);
 	gap:30px;
 `;
 const H = styled.h1`
