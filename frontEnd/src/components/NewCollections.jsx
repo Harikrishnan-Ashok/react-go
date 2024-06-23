@@ -7,7 +7,7 @@ const NewCollec=styled.div`
 	flex-direction:column;
 	align-items:center;
 	gap:10px;
-	height:90vh;
+	margin-bottom:100px;
 `;
 const H=styled.div`
 	color:#171717;
