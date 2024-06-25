@@ -6,6 +6,7 @@ import ShopCategory from "./pages/ShopCategory"
 import Product from "./pages/Product"
 import Kart from "./pages/Kart"
 import LoginSignup from "./pages/LoginSignupPage"
+import Footer from "./components/Footer";
 
 export default function App()
 {
@@ -23,5 +24,6 @@ export default function App()
 			<Route path={"/kart"} element={<Kart />}></Route>
 			<Route path={"/login"} element={<LoginSignup />}></Route>
 		</Routes>
+		<Footer></Footer>
 	</BrowserRouter>);
 }

@@ -42,7 +42,25 @@ const SocialIconsContainer=styled.div `
 	background:#fbfbfb;
 	border:1px solid #ebebeb;
 `;
-const FooterCopyright=styled.div ``;
+const HR=styled.hr `
+	margin-top:30px;
+	width:80%;
+	border:none;
+	border-radius:10px;
+	height:3px;
+	background:#c7c7c7;
+
+`;
+const FooterCopyright=styled.div `
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	gap:30px;
+	width:100%;
+	margin-bottom:30px;
+	font-size:20px;
+	color:#1a1a1a;
+`;
 
 export default function Footer()
 {
@@ -72,7 +90,7 @@ export default function Footer()
 			</SocialIcons>
 		</Container>
 		<FooterCopyright>
-			<hr />
+			<HR />
 			<p>Copy Right @ 2024 - All rights Reserved</p>
 		</FooterCopyright>
 		</>);
