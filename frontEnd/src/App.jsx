@@ -19,7 +19,7 @@ export default function App()
 			<Route path={"/"} element={<Shop />}></Route>
 			<Route path={"/men"} element={<ShopCategory category="men" banner={men_banner} />}></Route>
 			<Route path={"/women"} element={<ShopCategory category="women" banner={women_banner} />}></Route>
-			<Route path={"/kids"} element={<ShopCategory category="kids" banner={kids_banner} />}></Route>
+			<Route path={"/kids"} element={<ShopCategory category="kid" banner={kids_banner} />}></Route>
 			<Route path="/product" element={<Product />}>
 				<Route path=':ProductID' element={<Product />}></Route>	
 			</Route>
