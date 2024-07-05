@@ -1,6 +1,15 @@
 import styled from "styled-components";
 
-const Container=styled.div``;
+const Container=styled.div`
+	display:flex;
+	align-items:center;
+	gap:8px;
+	color:#5e5e5e;
+	font-size:16px;
+	font-weight:600px;
+	margin:60px 170px;
+	text-transform:capitalize;
+`;
 
 
 import arrow_icon from "../components/assets/breadcrum_arrow.png"
