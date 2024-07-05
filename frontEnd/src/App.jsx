@@ -21,7 +21,7 @@ export default function App()
 			<Route path={"/women"} element={<ShopCategory category="women" banner={women_banner} />}></Route>
 			<Route path={"/kids"} element={<ShopCategory category="kid" banner={kids_banner} />}></Route>
 			<Route path="/product" element={<Product />}>
-				<Route path=':ProductID' element={<Product />}></Route>	
+				<Route path=':productId' element={<Product />}></Route>	
 			</Route>
 			<Route path={"/kart"} element={<Kart />}></Route>
 			<Route path={"/login"} element={<LoginSignup />}></Route>

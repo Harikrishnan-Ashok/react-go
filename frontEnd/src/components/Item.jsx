@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const ItemContainer=styled.div`
 	width:350px;
@@ -30,7 +31,7 @@ export default function Item(props)
 {
 	return(<>
 		<ItemContainer>
-			<img src={props.image} alt=""></img>
+			<Link to={`/product/${props.id}`}><img src={props.image} alt=""></img></Link>
 			<P>{props.name}</P>
 			<ItemPrices>
 				<NewPrice>{props.new_price} Rps</NewPrice>
