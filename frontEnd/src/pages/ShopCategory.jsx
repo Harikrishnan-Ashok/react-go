@@ -48,7 +48,7 @@ const LoadMore = styled.div`
 
 
 export default function ShopCategory(props) {
-  const { allProducts } = useContext(ShopContext);
+  const { allProduct } = useContext(ShopContext);
 
   return (
     <Container>
