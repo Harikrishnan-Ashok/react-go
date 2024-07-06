@@ -88,9 +88,12 @@ const Category=styled.div`
 
 import star_icon from "../components/assets/star_icon.png"
 import star_dull_icon from "../components/assets/star_dull_icon.png"
+import {useContext} from "react";
+import {ShopContext} from "../context/ShopContext";
 export default function ProductDisplay(props)
 {
 	const {product}=props;
+	const {addToKart}=useContext(ShopContext)
 	return(<>
 		<Container>
 			<Left>
@@ -129,7 +132,7 @@ export default function ProductDisplay(props)
 						<SizeDiv>XXL</SizeDiv>
 					</Sizes>
 				</SizeContainer>
-				<Button>Add to Kart</Button>
+				<Button onClick={()=>{addToKart(product.id)}}>Add to Kart</Button>
 				<Category><span style={{fontWeight:"600"}} >Category:</span>Women,Tshirt,CropTop</Category>
 				<Category><span style={{fontWeight:"600"}}>Tags:</span>Mordern,Latest</Category>
 			</Right>
