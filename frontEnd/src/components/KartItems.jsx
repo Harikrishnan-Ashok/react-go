@@ -90,7 +90,7 @@ import {ShopContext} from "../context/ShopContext";
 import remove_icon from "../components/assets/cart_cross_icon.png"
 export default function KartItems()
 {
-	const {all_product,kartItem,removeFromKart}= useContext(ShopContext)
+	const {all_product,kartItem,removeFromKart,getTotal}= useContext(ShopContext)
 	return(
 		<Container>
 			<Main>
@@ -127,7 +127,7 @@ export default function KartItems()
 					<div>
 						<TotalItem>
 							<P>Subtotal</P>
-							<P></P>
+							<P>{getTotal()}</P>
 						</TotalItem>
 						<hr style={{height:"3px", background:"#e2e2e2", border:"0"}}></hr>
 						<TotalItem>

@@ -27,7 +27,20 @@ export default function ShopContextProvider(props)
 	{
 		setKartItem((prev)=>({...prev,[itemId]:prev[itemId]-1}))
 	}
-		var contextValue={all_product,kartItem,addToKart,removeFromKart}
+	function getTotal()
+	{
+		let total=0;
+		for(const i in kartItem)
+		{
+			if(kartItem[i]>0)
+			{
+				let iteminfo= all_product.find((product)=>product.id===Number(i))
+				total=total+iteminfo.new_price * kartItem[i]
+			}
+		}
+		return total;
+	}
+		var contextValue={all_product,kartItem,addToKart,removeFromKart,getTotal}
 	return(
 		<ShopContext.Provider value={contextValue}>
 		{props.children}
