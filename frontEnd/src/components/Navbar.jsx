@@ -69,12 +69,14 @@ const KartCount = styled.div`
 
 import shop from "./assets/bag.png"
 import kart from "./assets/store.png"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
+import {ShopContext} from "../context/ShopContext";
 
 export default function Navbar()
 {
 	const [menu,setMenu]=useState("shop")
+	const {getTotalKartItems}=useContext(ShopContext)
 	return(<>
 		<Nav>
 			<NavLogo>
@@ -102,7 +104,7 @@ export default function Navbar()
 			</NavMenu>
 			<LoginKart>
 				<Link to={"kart"}><img style={{width: "50px", height: "50px"}} src={kart} alt="icon here" /></Link>	
-				<KartCount>0</KartCount>
+				<KartCount>{getTotalKartItems()}</KartCount>
 				<Link to={"/login"}><Button>Login</Button></Link>
 			</LoginKart>
 		</Nav>

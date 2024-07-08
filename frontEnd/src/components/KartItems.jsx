@@ -137,7 +137,7 @@ export default function KartItems()
 						<hr style={{height:"3px", background:"#e2e2e2", border:"0"}}></hr>
 						<TotalItem>
 							<h3>Total</h3>
-							<h3></h3>
+							<h3>{getTotal()}</h3>
 						</TotalItem>
 					</div>
 					<Button2>Proceed to Checkout</Button2>
