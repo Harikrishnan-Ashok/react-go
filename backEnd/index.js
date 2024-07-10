@@ -19,8 +19,27 @@ app.get("/",(req,res)=>{
 	res.send("express is running")
 })
 
+const storage = multer.diskStorage({
+	destination:"./upload/images",
+	filename:(req, file, callback)=>{
+		return callback(null,`${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+	}
+})
 
-app.listen(4000,(error)=>{
+const upload=multer({storage:storage})
+
+// Creating upload endpoint
+app.use("/images",express.static("upload/images"))
+
+app.post("/upload",upload.single("product"),(req,res)=>{
+	res.json({
+		success:1,
+		image_url:`http://localhost:${port}/images/${req.file.filename}`
+	})
+})
+
+
+app.listen(port,(error)=>{
 	if (!error){
 		console.log("SERVER ODI KUTTA :"+port)
 	}
