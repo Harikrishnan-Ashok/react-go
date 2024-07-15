@@ -113,7 +113,14 @@ app.post("/removeProduct",async(req,res)=>{
 		name:req.body.name
 	})
 })
-	
+
+// createing api for getting all producs
+app.get("/allproducts",async(req,res)=>{
+	let products = await Product.find({})
+	console.log("all product featched")
+	res.send(products);
+})
+
 app.listen(port,(error)=>{
 	if (!error){
 		console.log("SERVER ODI KUTTA :"+port)
