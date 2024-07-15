@@ -1,6 +1,8 @@
+import Admin from "./Pages/Admin";
+
 export default function App()
 {
 	return(<>
-		<h1>admin</h1>
+		<Admin></Admin>
 		</>);
 }
