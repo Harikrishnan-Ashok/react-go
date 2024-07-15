@@ -6,7 +6,7 @@ const Container=styled.div`
 	box-shadow:0 1px 3px -2px #000;
 	justify-content:space-between;
 	margin-bottom:1px;
-	background:white;
+	background:#a5a5a5;
 `;
 import navlogo from "../assets/logo.png";
 import navprofile from "../assets/pfp.ico";

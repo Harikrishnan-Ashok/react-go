@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Navbar from "../Components/Navbar";
+import SideBar from "../Components/SideBar";
 
 const AdminContainer=styled.div``;
 
@@ -7,7 +7,7 @@ export default function Admin()
 {
 	return(<>
 		<AdminContainer>
-			<Navbar></Navbar>	
+			<SideBar></SideBar>
 		</AdminContainer>
 	</>);
 }
