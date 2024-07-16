@@ -4,7 +4,9 @@ import {Route, Routes} from "react-router-dom";
 import AddProduct from "../Components/AddProduct";
 import ListProduct from "../Components/ListProduct";
 
-const AdminContainer=styled.div`display:flex;`;
+const AdminContainer=styled.div`
+	display:flex;
+`;
 
 export default function Admin()
 {
