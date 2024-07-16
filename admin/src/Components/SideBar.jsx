@@ -8,14 +8,14 @@ const Container=styled.div`
 	width:100%;
 	max-width:250px;
 	height:100vh;
-	background:#a5a5a5;
+	background:#fff;
 `;
 const SideBarItem=styled.div`
 	display:flex;
 	align-items:center;
 	justify-content:center;
 	margin:0 20px;
-	padding 5px 10px;
+	padding:5px 10px;
 	border-radius:6px;
 	background:#f6f6f6;
 	gap:20px;
