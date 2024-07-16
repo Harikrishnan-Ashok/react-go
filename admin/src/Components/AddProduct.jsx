@@ -61,8 +61,13 @@ const Button=styled.button`
 `;
 
 import upload_area from "../assets/upload_area.png"
+import {useState} from "react";
 export default function AddProduct()
 {
+	const [image,setImage]=useState(false) 
+	function handleImage(e){
+		setImage(e.target.file[0])
+	}
 	return(
 		<Container>
 			<ProductItemFeild>
@@ -89,9 +94,9 @@ export default function AddProduct()
 			</ProductItemFeild>
 		<ProductItemFeild>
 			<Label htmlFor="file-input">
-				<Img src={upload_area}></Img>
+				<Img src={image?URL.createObjectURL(image):upload_area}></Img>
 			</Label>
-			<Input type="file" name="image" id="file-input" hidden></Input>
+			<Input onChange={handleImage} type="file" name="image" id="file-input" hidden></Input>
 		</ProductItemFeild>
 		<Button>ADD</Button>
 	</Container>);
