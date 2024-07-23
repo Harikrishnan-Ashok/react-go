@@ -64,29 +64,82 @@ import upload_area from "../assets/upload_area.png"
 import {useState} from "react";
 export default function AddProduct()
 {
-	const [image,setImage]=useState(false) 
+	const [image,setImage]=useState(false)
+	const [productDeat,setProductDeat]=useState({
+		name:"",
+		image:"",
+		category:"women",
+		new_price:"",
+		old_price:""
+	})
+	
 	function handleImage(e){
-		setImage(e.target.file[0])
+		setImage(e.target.files[0])
 	}
+	
+	function handleProductDeat(e)
+	{
+		setProductDeat({...productDeat,[e.target.name]:e.target.value})
+	}
+
+	async function addProduct() {
+		let responseData;
+		let product = productDeat; // Ensure `productDeat` is defined and correct
+
+		let formData = new FormData();
+		formData.append("product", image); // Ensure `image` is defined
+
+		// Upload the image
+		 await fetch("http://localhost:4000/upload", {
+		 method: "POST",
+			headers: {
+			Accept: "application/json",
+		},
+		body: formData,
+	}).then((res) => res.json()).then((data) => {
+      responseData = data;
+    });
+
+		// Check if image upload was successful
+		if (responseData.success) {
+		product.image = responseData.image_url;
+		console.log(product);
+
+		// Add the product
+		await fetch("http://localhost:4000/addproduct", {
+		method: "POST",
+		headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        data.success ? alert("Product Added") : alert("Failed");
+      });
+  }
+}
+
 	return(
 		<Container>
 			<ProductItemFeild>
 				<P>Product Title</P>
-				<Input type="text" name="name" placeholder="Type Here..."></Input>
+				<Input type="text" name="name" value={productDeat.name} onChange={handleProductDeat} placeholder="Type Here..."></Input>
 			</ProductItemFeild>
 			<ProductPrice>
 				<ProductItemFeild>
 					<P>Price</P>	
-					<Input type="text" name="old_price" placeholder="Type Here..."></Input>
+					<Input type="text" name="old_price" value={productDeat.old_price} onChange={handleProductDeat} placeholder="Type Here..."></Input>
 				</ProductItemFeild>
 				<ProductItemFeild>
 					<P>Price On Offer</P>	
-					<Input type="text" name="new_price" placeholder="Type Here..."></Input>
+					<Input type="text" name="new_price" value={productDeat.new_price} onChange={handleProductDeat} placeholder="Type Here..."></Input>
 				</ProductItemFeild>
 			</ProductPrice>
 			<ProductItemFeild>
 				<P>Category</P>
-				<Select name="category">
+				<Select name="category" value={productDeat.category} onChange={handleProductDeat}>
 					<option value="women">Women</option>
 					<option value="men">Men</option>		
 					<option value="kid">Kid</option>
@@ -98,6 +151,6 @@ export default function AddProduct()
 			</Label>
 			<Input onChange={handleImage} type="file" name="image" id="file-input" hidden></Input>
 		</ProductItemFeild>
-		<Button>ADD</Button>
+		<Button onClick={()=>{addProduct()}} >ADD</Button>
 	</Container>);
 }
