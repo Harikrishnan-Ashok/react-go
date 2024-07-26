@@ -77,7 +77,7 @@ export default function ListProduct() {
 						<ProductIcon src={product.image} ></ProductIcon>
 						<P>{product.name}</P>
 						<P>{product.old_price}</P>
-						<P>{product.new_Price}</P>
+						<P>{product.new_price}</P>
 						<P>{product.category}</P>
 						<P onClick={() => { removeProduct(product.id) }} style={{ margin: "auto", cursor: "pointer", color: "red" }}>X</P>
 					</ListProductFormatMain>
