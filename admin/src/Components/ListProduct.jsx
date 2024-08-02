@@ -35,7 +35,9 @@ const ListProductFormatMain = styled.div`
 	font-size:15px;
 	font-weight:500;
 `;
-const ListAllProducts = styled.div``;
+const ListAllProducts = styled.div`
+	width:100%;
+`;
 const ProductIcon = styled.img`
 	height:80px;
 `;
