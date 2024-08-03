@@ -1,12 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-const Container=styled.div`
+const Container = styled.div`
 	width:100%;
 	height:80vh;
 	background:#fce3fe;
 	padding-top:100px;
 `;
-const Body=styled.div`
+const Body = styled.div`
 	display:flex;
 	flex-direction:column;
 	width:500px;
@@ -15,16 +16,16 @@ const Body=styled.div`
 	margin:auto;
 	padding:40px 60px;
 `;
-const H =styled.h1`
+const H = styled.h1`
 	margin:20px 0px;
 `;
-const LoginSignupFeild=styled.div`
+const LoginSignupFeild = styled.div`
 	display:flex;
 	flex-direction:column;
 	gap:30px;
 	margin-top:30px;
 `;
-const Input=styled.input`
+const Input = styled.input`
 	height:72px;
 	width:100%;
 	padding-left:20px;
@@ -33,7 +34,7 @@ const Input=styled.input`
 	color:#5c5c5c;
 	font-size:18px;	
 `;
-const Button=styled.button`
+const Button = styled.button`
 	margin-top:20px;
 	width:525px;
 	height:72px;
@@ -47,16 +48,16 @@ const Button=styled.button`
 
 `;
 
-const LSLogin=styled.div`
+const LSLogin = styled.div`
 	margin-top:20px;
 	color:#5c5c5c;
 	font-size:18px;
 	font-weight:500;
 `;
-const P=styled.p`
+const P = styled.p`
 
 `;
-const LSAgreed=styled.div`
+const LSAgreed = styled.div`
 	display:flex;
 	align-items:center;
 	margin-top:25px;
@@ -66,24 +67,75 @@ const LSAgreed=styled.div`
 	font-weight:500;
 `;
 
-export default function LoginSignupPage()
-{
-	return(<>
+export default function LoginSignupPage() {
+	const [state, setState] = useState("login")
+	const [formData, setFormData] = useState({
+		username: "",
+		password: "",
+		email: ""
+	})
+
+	function handleChange(e) {
+		setFormData({ ...formData, [e.target.name]: e.target.value })
+	}
+	async function login() {
+		console.log("login", formData)
+	}
+	async function signup() {
+		console.log("signup", formData)
+		let responseData;
+		await fetch("http://localhost:4000/signup", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		}).then((response) => response.json()).then((data) => responseData = data)
+		if (responseData.success) {
+			localStorage.setItem("auth-token", responseData.token);
+			window.location.replace("/")
+		}
+		else { alert("Check the email and password again ") }
+	}
+
+	return (<>
 		<Container>
 			<Body>
-				<H>SIGN UP</H>
+				<H>{state}</H>
 				<LoginSignupFeild>
-					<Input type="text" placeholder="Your Name"></Input>
-					<Input type="email" placeholder="Your Email"></Input>
-					<Input type="password" placeholder="Your Password"></Input>
+					{state === "Sign Up" ? <Input name="username" value={formData.username} onChange={handleChange} type="text" placeholder="Your Name"></Input> : <></>}
+					<Input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Your Email"></Input>
+					<Input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Your Password"></Input>
 				</LoginSignupFeild>
-				<Button>Contine</Button>
-				<LSLogin>Alredy have an account  <span style={{color:"#ff4141", fontWeight:"600"}}>Login</span></LSLogin>
+				<Button onClick={() => { state === "login" ? login() : signup() }}>Contine</Button>
+
+				{state === "Sign Up" ? (
+					<LSLogin>
+						Already have an account?
+						<span
+							onClick={() => setState("Login")}
+							style={{ color: "#ff4141", fontWeight: "600", marginLeft: "10px", cursor: "pointer" }}
+						>
+							Login
+						</span>
+					</LSLogin>
+				) : (
+					<LSLogin>
+						Create an account
+						<span
+							onClick={() => setState("Sign Up")}
+							style={{ color: "#ff4141", fontWeight: "600", marginLeft: "10px", cursor: "pointer" }}
+						>
+							Sign Up
+						</span>
+					</LSLogin>
+				)}
 				<LSAgreed>
-				<input type="checkbox" name="" id=""></input>
-				<P>By continewing i agreed to the terms and policies...</P>
-			</LSAgreed>
+					<input type="checkbox" name="" id=""></input>
+					<P>By continewing i agreed to the terms and policies...</P>
+				</LSAgreed>
 			</Body>
-		</Container>
+		</Container >
 	</>);
 }
