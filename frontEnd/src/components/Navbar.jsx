@@ -33,7 +33,7 @@ const Item = styled.li`
 	justify-content:center;
 	cursor:pointer;
 `;
-const LoginKart= styled.div`
+const LoginKart = styled.div`
 	display:flex;
 	align-items:center;
 	gap:45px;
@@ -69,43 +69,49 @@ const KartCount = styled.div`
 
 import shop from "./assets/bag.png"
 import kart from "./assets/store.png"
-import {useContext, useState} from "react";
-import {Link} from "react-router-dom";
-import {ShopContext} from "../context/ShopContext";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { ShopContext } from "../context/ShopContext";
 
-export default function Navbar()
-{
-	const [menu,setMenu]=useState("shop")
-	const {getTotalKartItems}=useContext(ShopContext)
-	return(<>
+export default function Navbar() {
+	const [menu, setMenu] = useState("shop")
+	const { getTotalKartItems } = useContext(ShopContext)
+	return (<>
 		<Nav>
 			<NavLogo>
-				<img style={{width: "50px", height: "50px"}} src={shop} alt="icon here" />
+				<img style={{ width: "50px", height: "50px" }} src={shop} alt="icon here" />
 				<Text>POTS KADA</Text>
 			</NavLogo>
 			<NavMenu>
 
-			<Item onClick={() => setMenu("shop")}><Link style={{textDecoration:"none"}}to={"/"}>Shop
-				{menu === "shop" && (
-					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Link></Item>
-			<Item onClick={() => setMenu("women")}><Link style={{textDecoration:"none"}} to={"/women"}>Women
-				{menu === "women" && (
-					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Link></Item>
-			<Item onClick={() => setMenu("men")}><Link style={{textDecoration:"none"}} to={"/men"}>Men
-				{menu === "men" && (
-					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Link></Item>
-			<Item onClick={() => setMenu("kids")}><Link style={{textDecoration:"none"}} to={"kids"}>Kids
-				{menu === "kids" && (
-					<hr style={{border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px"}} />)}
-			</Link></Item>
+				<Item onClick={() => setMenu("shop")}><Link style={{ textDecoration: "none" }} to={"/"}>Shop
+					{menu === "shop" && (
+						<hr style={{ border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px" }} />)}
+				</Link></Item>
+				<Item onClick={() => setMenu("women")}><Link style={{ textDecoration: "none" }} to={"/women"}>Women
+					{menu === "women" && (
+						<hr style={{ border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px" }} />)}
+				</Link></Item>
+				<Item onClick={() => setMenu("men")}><Link style={{ textDecoration: "none" }} to={"/men"}>Men
+					{menu === "men" && (
+						<hr style={{ border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px" }} />)}
+				</Link></Item>
+				<Item onClick={() => setMenu("kids")}><Link style={{ textDecoration: "none" }} to={"kids"}>Kids
+					{menu === "kids" && (
+						<hr style={{ border: "none", height: "3px", backgroundColor: "#ff4141", width: "80%", borderRadius: "3px" }} />)}
+				</Link></Item>
 			</NavMenu>
 			<LoginKart>
-				<Link to={"kart"}><img style={{width: "50px", height: "50px"}} src={kart} alt="icon here" /></Link>	
+				{localStorage.getItem("auth-token") ?
+					<Button
+						onClick={() => {
+							localStorage.removeItem("auth-token")
+							window.location.replace("/")
+						}
+						}>logout</Button> :
+					<Link to={"/login"}><Button>Login</Button></Link>}
+				<Link to={"kart"}><img style={{ width: "50px", height: "50px" }} src={kart} alt="icon here" /></Link>
 				<KartCount>{getTotalKartItems()}</KartCount>
-				<Link to={"/login"}><Button>Login</Button></Link>
 			</LoginKart>
 		</Nav>
 	</>);
