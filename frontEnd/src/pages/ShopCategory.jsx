@@ -2,7 +2,6 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { ShopContext } from "../context/ShopContext";
 import dropDown from "../components/assets/dropdown_icon.png"
-import all_product from "../components/assets/all_product";
 import Item from "../components/Item";
 
 const Container = styled.div`
@@ -48,32 +47,30 @@ const LoadMore = styled.div`
 
 
 export default function ShopCategory(props) {
-  const { allProduct } = useContext(ShopContext);
+	const { all_product } = useContext(ShopContext);
 
-  return (
-    <Container>
-      <img src={props.banner}></img>
-	  <IndexSort>
-		<StyleP>
-			<StyleSpan>showing 1 - 12 </StyleSpan> out of 36 products
-		</StyleP>
-		<Sort> Sort By  <img src={dropDown}></img>
-		</Sort>
-	  </IndexSort>
-	  <Products>
-		{all_product.map((item,i)=>{
-		if(props.category===item.category)
-			{
-				return<Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} ></Item>
-			}
-		else
-			{
-				return null;
-			}
-		})}
-	  </Products>
-	  <LoadMore>Explore More</LoadMore>
-    </Container>
-  );
+	return (
+		<Container>
+			<img src={props.banner}></img>
+			<IndexSort>
+				<StyleP>
+					<StyleSpan>showing 1 - 12 </StyleSpan> out of 36 products
+				</StyleP>
+				<Sort> Sort By  <img src={dropDown}></img>
+				</Sort>
+			</IndexSort>
+			<Products>
+				{all_product.map((item, i) => {
+					if (props.category === item.category) {
+						return <Item key={i} id={item.id} name={item.name} image={item.image} new_price={item.new_price} old_price={item.old_price} ></Item>
+					}
+					else {
+						return null;
+					}
+				})}
+			</Products>
+			<LoadMore>Explore More</LoadMore>
+		</Container>
+	);
 }
 
