@@ -136,6 +136,14 @@ app.get("/newcollection", async (req, res) => {
 	res.send(newcollection);
 })
 
+//popular in women section 
+app.get("/pplr", async (req, res) => {
+	let product = await Product.find({ category: "women" });
+	let pplr = product.slice(0, 4)
+	console.log("popular in women fetched")
+	res.send(pplr)
+})
+
 //schema for user model
 const Users = mongoose.model("Users", {
 	name: {
