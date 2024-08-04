@@ -80,6 +80,20 @@ export default function LoginSignupPage() {
 	}
 	async function login() {
 		console.log("login", formData)
+		let responseData;
+		await fetch("http://localhost:4000/login", {
+			method: "POST",
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData),
+		}).then((response) => response.json()).then((data) => responseData = data)
+		if (responseData.success) {
+			localStorage.setItem("auth-token", responseData.token);
+			window.location.replace("/")
+		}
+		else { alert("Check the email and password again ") }
 	}
 	async function signup() {
 		console.log("signup", formData)

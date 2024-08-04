@@ -199,10 +199,10 @@ app.post("/login", async (req, res) => {
 				}
 			}
 			const token = jwt.sign(data, "scecrt_ecom")
-			res.json({ sucess: ture, token })
+			res.json({ success: true, token })
 		}
 		else {
-			res.json({ sucess: false, errors: "Worng Password" })
+			res.json({ success: false, errors: "Worng Password" })
 		}
 	}
 	else {
