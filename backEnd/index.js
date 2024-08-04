@@ -128,6 +128,14 @@ app.listen(port, (error) => {
 	}
 })
 
+// for new collection
+app.get("/newcollection", async (req, res) => {
+	let product = await Product.find({});
+	let newcollection = product.slice(1).slice(-8);
+	console.log("newcollection Fetched")
+	res.send(newcollection);
+})
+
 //schema for user model
 const Users = mongoose.model("Users", {
 	name: {
