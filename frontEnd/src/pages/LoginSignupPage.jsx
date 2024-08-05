@@ -72,7 +72,8 @@ export default function LoginSignupPage() {
 	const [formData, setFormData] = useState({
 		username: "",
 		password: "",
-		email: ""
+		email: "",
+		kart: {},
 	})
 
 	function handleChange(e) {

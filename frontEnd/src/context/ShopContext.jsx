@@ -17,12 +17,28 @@ export default function ShopContextProvider(props) {
 	useEffect(() => {
 		fetch("http://localhost:4000/allproducts").then((res) => res.json()).then((data) => setAllProduct(data))
 	}, [])
-
 	function addToKart(itemId) {
 		setKartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
-		console.log(kartItem)
+		if (localStorage.getItem("auth-token")) {
+			fetch("http://localhost:4000/addtokart", {
+				method: "POST",
+				headers: {
+					"Accept": "application/json",
+					"auth-token": localStorage.getItem("auth-token"),
+					"Content-Type": 'application/json',
+				},
+				body: JSON.stringify({ itemId: itemId })
+			})
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return res.json();
+				})
+				.then((data) => console.log(data))
+				.catch((error) => console.error('Error:', error));
+		}
 	}
-
 	function removeFromKart(itemId) {
 		setKartItem((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
 	}

@@ -1,5 +1,4 @@
 const port = 4000;
-
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
@@ -111,7 +110,6 @@ app.post("/removeProduct", async (req, res) => {
 		name: req.body.name
 	})
 })
-
 // createing api for getting all producs
 app.get("/allproducts", async (req, res) => {
 	let products = await Product.find({})
@@ -143,7 +141,28 @@ app.get("/pplr", async (req, res) => {
 	console.log("popular in women fetched")
 	res.send(pplr)
 })
+//middleware
+async function fetchUser(req, res, next) {
+	const token = req.header('auth-token');
+	if (!token) {
+		res.send({ errors: "no token avalible" })
+	}
+	else {
+		try {
+			const data = jwt.verify(token, "secret_ecom")
+			req.user = data.user;
+			next();
+		} catch (error) {
+			res.send({ errors: "no token aval" })
+		}
+	}
+}
 
+//for adding to kart
+app.post("/addtokart", fetchUser, async (req, res) => {
+	console.log(req.body, req.user);
+	res.json({ message: "ITEM ADDED TO KART" })
+})
 //schema for user model
 const Users = mongoose.model("Users", {
 	name: {
@@ -156,8 +175,8 @@ const Users = mongoose.model("Users", {
 	password: {
 		type: String,
 	},
-	kart: {
-		type: Object
+	kartData: {
+		type: Object,
 	},
 	date: {
 		type: Date,
@@ -195,7 +214,7 @@ app.post("/signup", async (req, res) => {
 			}
 		};
 
-		const token = jwt.sign(data, "secert_ecom");
+		const token = jwt.sign(data, "secret_ecom");
 		res.json({ success: true, token });
 	} catch (error) {
 		console.error("Error in signup:", error);
@@ -214,7 +233,7 @@ app.post("/login", async (req, res) => {
 					id: user.id
 				}
 			}
-			const token = jwt.sign(data, "scecrt_ecom")
+			const token = jwt.sign(data, "secret_ecom")
 			res.json({ success: true, token })
 		}
 		else {
