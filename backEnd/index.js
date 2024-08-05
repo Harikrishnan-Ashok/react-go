@@ -158,11 +158,6 @@ async function fetchUser(req, res, next) {
 	}
 }
 
-//for adding to kart
-app.post("/addtokart", fetchUser, async (req, res) => {
-	console.log(req.body, req.user);
-	res.json({ message: "ITEM ADDED TO KART" })
-})
 //schema for user model
 const Users = mongoose.model("Users", {
 	name: {
@@ -182,6 +177,12 @@ const Users = mongoose.model("Users", {
 		type: Date,
 		default: Date.now,
 	}
+})
+//for adding to kart
+app.post("/addtokart", fetchUser, async (req, res) => {
+	let userData = await Users.findOne({ _id: req.user.id })
+	userData.kartData[req.body.itemId] += 1;
+	await Users.findOneAndUpdate({ _id: req.user.id }, { kartData: userData.kartData })
 })
 
 // endpoint for registering user
