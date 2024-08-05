@@ -41,6 +41,25 @@ export default function ShopContextProvider(props) {
 	}
 	function removeFromKart(itemId) {
 		setKartItem((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
+		if (localStorage.getItem("auth-token")) {
+			fetch("http://localhost:4000/removeFromKart", {
+				method: "POST",
+				headers: {
+					"Accept": "application/json",
+					"auth-token": localStorage.getItem("auth-token"),
+					"Content-Type": 'application/json',
+				},
+				body: JSON.stringify({ itemId: itemId })
+			})
+				.then((res) => {
+					if (!res.ok) {
+						throw new Error('Network response was not ok');
+					}
+					return res.json();
+				})
+				.then((data) => console.log(data))
+				.catch((error) => console.error('Error:', error));
+		}
 	}
 	function getTotal() {
 		let total = 0;

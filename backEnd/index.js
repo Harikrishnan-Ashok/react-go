@@ -178,6 +178,7 @@ const Users = mongoose.model("Users", {
 		default: Date.now,
 	}
 })
+
 //for adding to kart
 app.post("/addtokart", fetchUser, async (req, res) => {
 	let userData = await Users.findOne({ _id: req.user.id })
@@ -185,6 +186,12 @@ app.post("/addtokart", fetchUser, async (req, res) => {
 	await Users.findOneAndUpdate({ _id: req.user.id }, { kartData: userData.kartData })
 })
 
+//for deleting to kart
+app.post("/removeFromKart", fetchUser, async (req, res) => {
+	let userData = await Users.findOne({ _id: req.user.id })
+	userData.kartData[req.body.itemId] -= 1;
+	await Users.findOneAndUpdate({ _id: req.user.id }, { kartData: userData.kartData })
+})
 // endpoint for registering user
 
 app.post("/signup", async (req, res) => {
