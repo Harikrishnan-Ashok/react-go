@@ -192,6 +192,14 @@ app.post("/removeFromKart", fetchUser, async (req, res) => {
 	userData.kartData[req.body.itemId] -= 1;
 	await Users.findOneAndUpdate({ _id: req.user.id }, { kartData: userData.kartData })
 })
+
+// endpoint for getting kartdata
+app.post("/getkart", fetchUser, async (req, res) => {
+	console.log("getkart")
+	let userData = await Users.findOne({ _id: req.user.id })
+	res.json(userData.kartData)
+})
+
 // endpoint for registering user
 
 app.post("/signup", async (req, res) => {

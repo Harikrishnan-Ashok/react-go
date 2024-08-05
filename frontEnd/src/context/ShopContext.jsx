@@ -16,6 +16,16 @@ export default function ShopContextProvider(props) {
 
 	useEffect(() => {
 		fetch("http://localhost:4000/allproducts").then((res) => res.json()).then((data) => setAllProduct(data))
+		if (localStorage.getItem("auth-token")) {
+			fetch("http://localhost:4000/getkart", {
+				method: "POST",
+				headers: {
+					"Accept": "application/json",
+					"auth-token": `${localStorage.getItem("auth-token")}`,
+					"Content-Type": "application/json",
+				}, body: "",
+			}).then((res) => res.json()).then((data) => setKartItem(data))
+		}
 	}, [])
 	function addToKart(itemId) {
 		setKartItem((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
