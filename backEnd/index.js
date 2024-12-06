@@ -6,12 +6,22 @@ const multer = require("multer");
 const path = require("path")
 const cors = require("cors");
 
+
+
+const password = "pot123";
+const encodedPassword = encodeURIComponent(password);
+
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// database conenction with mongo db 
-mongoose.connect("mongodb+srv://potbeater:Pots-Kada@cluster0.jjcdaab.mongodb.net/test");
+// database conenction with mongo db
+mongoose.connect(
+  `mongodb+srv://potbeater:${encodedPassword}@cluster0.jjcdaab.mongodb.net/test`
+  // "mongodb+srv://potbeater:Pots-Kada@123cluster0.jjcdaab.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  // "mongodb+srv://potbeater:Pots-Kada@123@cluster0.jjcdaab.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  // "mongodb+srv://potbeater:Pots-Kada@cluster0.jjcdaab.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+);
 
 //API Creation
 app.get("/", (req, res) => {
